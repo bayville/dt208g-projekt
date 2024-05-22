@@ -1,0 +1,19 @@
+
+<mat-tab-group>
+    <mat-tab label="First">
+        <div class="spinner" *ngIf="!loaded">
+            <mat-spinner  ></mat-spinner>
+        </div>
+            <div *ngFor="let course of courses" class="class="mat-typography>
+        <h4>{{course.courseName}}</h4>
+        <ul>
+            <li>{{course.points}}</li>
+            <li>{{course.progression}}</li>
+            <li><button (click)="addCourse(course)"></button></li>    
+        </ul>
+    </div>
+    </mat-tab>
+    <mat-tab label="Second"> </mat-tab>
+    <mat-tab label="Third"> Content 3 </mat-tab>
+</mat-tab-group>
+    
