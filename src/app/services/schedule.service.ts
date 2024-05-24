@@ -1,50 +1,51 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../models/course';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScheduleService {
-
   //Variable to store courses
   private courses: Course[] = []
 
   constructor(private snackBar : MatSnackBar) { 
-    this.loadCourses();
+    this.loadSavedCourses();
   }
 
 getCourses(): Course[]{
   return this.courses;
 }
 
-addCourse(course: Course): boolean {
+addCourse(course: Course): Observable<any> {
     try {
-      this.courses.push(course);
-      this.saveCourse()
-      return true;
+        const existingCourse = this.courses.find((c) => c.courseCode === course.courseCode);
+        console.log(existingCourse);
+
+        if (existingCourse) {
+            const error = new Error('Kursen är redan tillagd i ramschema');
+            return of({ error: error, status: false });
+        } else {
+            this.courses.push(course);
+            this.saveCourse();
+            return of({ message: "Kurs tillagd", status: true });
+        }
     } catch (error) {
-      return false;
+        return of({ error: error, status: false });
     }
-  }
+}
+
   
   saveCourse() : void{
-    sessionStorage.setItem('courseSchedule', JSON.stringify(this.courses));
+    localStorage.setItem('courseSchedule', JSON.stringify(this.courses));
   }
 
-  loadCourses() : void {
+  loadSavedCourses() : void {
     this.courses = [];
-    const storedCourses: string | null = sessionStorage.getItem('courseSchedule');
+    const storedCourses: string | null = localStorage.getItem('courseSchedule');
     if (storedCourses) {
       this.courses = JSON.parse(storedCourses);
-    } else {
-      this.snackBar.open('Error, det finns inga kurser att hämta', 'Stäng', {
-        duration: 3000, // 3 sekunder
-        horizontalPosition: 'right',
-        verticalPosition: 'bottom',
-        panelClass: ['success-snackbar']
-      });
-    }
-    
+    }    
   }
 }

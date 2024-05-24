@@ -18,5 +18,5 @@ export class CourseService {
     const courses = this.http.get<Course[]>(this.apiUrl);
     return courses;
   }
-  
+
 }
