@@ -8,13 +8,13 @@ import { Observable } from 'rxjs';
 })
 export class CourseService {
   //Apiurl containing courses in JSON format.
-  apiUrl: string = `https://matdah.github.io/DT208G---Programmering-i-TypeScript/Moment%205%20-%20Projekt/miun_courses.json`;
+  private apiUrl: string = `https://matdah.github.io/DT208G---Programmering-i-TypeScript/Moment%205%20-%20Projekt/miun_courses.json`;
   
   //Inject HttpClient
   constructor(private http: HttpClient) {}
 
   //Fetch courses
-  loadCourses(): Observable<Course[]> {
+  public loadCourses(): Observable<Course[]> {
     const courses = this.http.get<Course[]>(this.apiUrl);
     return courses;
   }

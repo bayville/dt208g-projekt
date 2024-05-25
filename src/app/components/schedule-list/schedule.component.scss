@@ -1,0 +1,14 @@
+@use '../../../styles/styles.scss' as styles;
+
+.center{
+    text-align: center;
+}
+
+.toolbar{
+    display: flex;
+    margin-block: 1em;
+
+    @include styles.mobile{
+        flex-direction: column;
+    }
+}

@@ -16,6 +16,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
+
 @Component({
   selector: 'app-schedule-list',
   standalone: true,
@@ -33,7 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule, 
     MatButtonModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.scss'
@@ -42,7 +43,7 @@ export class ScheduleListComponent {
  //Variable to store courses array
  courses : Course[] = [];
  subjects : string[] = [];
-
+ points : number = 0;
  //Bolean to show or hide loading spinner
  loaded: boolean = false;
  displayedColumns: string[] = ['courseCode', 'courseName', 'points' , 'subject', 'actions'];
@@ -56,24 +57,28 @@ export class ScheduleListComponent {
  }
  
  ngOnInit() {
-   const storedCourses = sessionStorage.getItem('courses');
-   if (storedCourses) {
-     this.courses = JSON.parse(storedCourses);
-     this.loaded = true;
-   }else {
-     this.courseService.loadCourses().subscribe((courses => {
-       this.loaded = true;
-       this.courses = courses;
-       sessionStorage.setItem('courses', JSON.stringify(courses));
-       this.dataSource = new MatTableDataSource(this.courses); 
-       this.dataSource.sort = this.sort;
-       this.dataSource.paginator = this.paginator;
-       this.getSubjects();
-       console.log(this.subjects);
-     }));
-   }
+  this.scheduleInit();
+  const points = this.scheduleService.countPoints();
+  console.log(points);
+}
 
- }
+
+scheduleInit(): void {
+  const savedCourses = this.scheduleService.getCourses();
+  if (savedCourses){
+    this.courses = savedCourses;
+    this.loaded = true;
+    this.dataSource = new MatTableDataSource(this.courses);
+    this.getSubjects();
+    this.points = this.scheduleService.countPoints();
+  }
+}
+
+ngAfterViewInit() {
+  this.dataSource.paginator = this.paginator;
+  this.dataSource.sort = this.sort;
+}
+
 
  getSubjects(): void {
    const subjectsSet = new Set<string>(); //Using set to guarantee no duplicates are added
@@ -110,17 +115,19 @@ export class ScheduleListComponent {
    }
  }
 
- addCourse(course : Course){
-   this.scheduleService.addCourse(course).subscribe(respone => {
-     if (respone.status === true) {
-       this.snackBar.open(`Kursen ${course.courseName} tillagd i ramschema.`, 'Stäng', {
+ removeCourse(course : Course){
+   this.scheduleService.removeCourse(course).subscribe(response => {
+     if (response.status === true) {
+       this.snackBar.open(`Kursen ${course.courseName} borttagen från ramschema.`, 'Stäng', {
          duration: 3000, // 3 sekunder
          horizontalPosition: 'right',
          verticalPosition: 'bottom',
          panelClass: ['success-snackbar']
        })
+       this.scheduleInit();
+       this.ngAfterViewInit();
      } else {
-       this.snackBar.open(`${respone.error}`, 'Stäng', {
+       this.snackBar.open(`${response.error}`, 'Stäng', {
          duration: 3000, // 3 sekunder
          horizontalPosition: 'right',
          verticalPosition: 'bottom',
@@ -128,6 +135,16 @@ export class ScheduleListComponent {
        });
      }
    });
+ }
+
+ //Clears the schedule and reloads schedule
+clearSchedule(){
+  const confirm = window.confirm('Är du säker på att du vill rensa ramschemat?');
+
+  if (confirm){
+    this.scheduleService.removeAllCourses();
+    this.scheduleInit();
+  }
 
  }
  

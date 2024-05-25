@@ -59,7 +59,6 @@ export class CourseListComponent{
     this.courseService.loadCourses().subscribe((courses => {
       this.loaded = true;
       this.courses = courses;
-      sessionStorage.setItem('courses', JSON.stringify(courses));
       this.dataSource = new MatTableDataSource(this.courses); 
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
@@ -68,8 +67,6 @@ export class CourseListComponent{
     }));
   }
   
-
-
   getSubjects(): void {
     const subjectsSet = new Set<string>(); //Using set to guarantee no duplicates are added
     this.courses.forEach(course => {
