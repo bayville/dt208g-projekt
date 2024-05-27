@@ -1,0 +1,10 @@
+@use '../../../styles/styles.scss' as styles;
+
+div{
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+
+    @include styles.tablet{
+        grid-template-columns: 1fr;
+    }
+}

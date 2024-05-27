@@ -18,13 +18,13 @@
     //Priary button styles
     &__primary{
         //Red button
-        &--red{
+        &--yellow{
             @extend .btn;
-            background: a.$primary-red;
-            color: white;
+            background: a.$primary-yellow;
+            color: a.$primary-blue;
             &:hover{
-                color: white;
-                background: darken(a.$primary-red, 10%);
+                color: a.$primary-blue;
+                background: darken(a.$primary-yellow, 15%);
             }
         }
         &--dark{
@@ -39,13 +39,13 @@
     }
 
     &__outline{
-        &--red{
+        &--yellow{
             @extend .btn;
             background-color: transparent;
-            color: a.$primary-red;
-            border: 2px solid a.$primary-red;
+            color: a.$primary-yellow;
+            border: 2px solid a.$primary-yellow;
             &:hover{
-                color: darken(a.$primary-red, 10%);
+                color: darken(a.$primary-yellow, 10%);
             }
         }
 
