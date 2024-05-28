@@ -1,0 +1,23 @@
+@use '../../../styles/styles.scss' as styles;
+
+
+div{
+    background-color: styles.$primary-blue;
+    height: 70dvh;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+
+    section{
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        h1,h2 {
+            color: styles.$primary-yellow;
+        }
+    }
+
+}
+
