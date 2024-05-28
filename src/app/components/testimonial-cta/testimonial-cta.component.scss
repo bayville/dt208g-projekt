@@ -1,0 +1,56 @@
+@use '../../../styles/styles.scss' as styles;
+
+.testimonial{
+    background-color: styles.$primary-blue;
+    padding-block: styles.$section-padding;
+
+    &__content{
+        display: flex;
+        gap: 2rem;
+        max-width: 800px;
+        margin-inline: auto;
+
+        img{
+            object-fit: cover;
+            width: 200px;
+            height: 290px;
+            border-radius: 30px 0 30px 0;
+        }
+
+        @include styles.tablet{
+            flex-direction: column;
+
+            img{
+                width: 100%;
+                height: auto;
+            }
+        }
+        
+        &--title{
+            color: styles.$primary-yellow;
+            text-transform: uppercase;
+        }
+
+        blockquote{
+            margin-inline: 0;
+            color: white;
+            max-width: 65ch;
+
+            footer{
+                color: styles.$primary-light-blue;
+                margin-top: 1rem;
+                p{
+                    margin: 0;
+                    &:first-child{
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    
+    }
+
+ 
+}
+
+

@@ -2,6 +2,7 @@
 
 .linkBox{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -10,16 +11,25 @@
     text-decoration: none;
     color: styles.$primary-blue; 
     text-transform: uppercase;
-    font-size: 2rem;
+    padding: 1rem;
     font-weight: bold;
 
     &__yellow{
         @extend .linkBox;
         background-color: styles.$primary-yellow;
+        &:hover{
+            color: styles.$primary-blue;
+            background: darken(styles.$primary-yellow, 20%);
+        }
     }
 
     &__light-blue{
         @extend .linkBox;
         background-color: styles.$primary-light-blue;
+
+        &:hover{
+            color: styles.$primary-blue;
+            background: lighten(styles.$primary-light-blue, 10%);
+        }
     }
 }

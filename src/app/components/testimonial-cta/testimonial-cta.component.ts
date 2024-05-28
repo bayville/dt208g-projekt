@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-hero',
+  selector: 'app-testimonial-cta',
   standalone: true,
   imports: [RouterLink, NgOptimizedImage],
-  templateUrl: './hero.component.html',
-  styleUrl: './hero.component.scss'
+  templateUrl: './testimonial-cta.component.html',
+  styleUrl: './testimonial-cta.component.scss'
 })
-export class HeroComponent {
+export class TestimonialCtaComponent {
 
 }

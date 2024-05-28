@@ -12,3 +12,12 @@
         flex-direction: column;
     }
 }
+
+a{
+    color: styles.$primary-dark;
+    
+    mat-icon{
+        font-size: 1rem;
+        vertical-align: middle;
+    }
+}

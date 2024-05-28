@@ -1,9 +1,12 @@
-.spinner{
-    margin-inline: auto;
-    height: 100dvh;
-    width: 100dvw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-items: center;
+@use '../../../styles/styles.scss' as styles;
+
+
+
+a{
+    color: styles.$primary-dark;
+    
+    mat-icon{
+        font-size: 1rem;
+        vertical-align: middle;
+    }
 }

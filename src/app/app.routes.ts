@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { ScheduleListComponent } from './components/schedule-list/schedule.component';
-import { CourseListComponent } from './components/course-list/course-list.component';
 import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
-    { path: 'schedule', component: ScheduleListComponent },
-    { path: 'courses', component: CourseListComponent },
+    { path: 'schedule', 
+    loadComponent: () => import('./pages/schedule/schedule.component').then(c => c.ScheduleComponent)},
+    { path: 'courses', 
+    loadComponent: () => import('./pages/courses/courses.component').then(c => c.CoursesComponent) },
     { path: '', component: HomeComponent },
     { path: 'home', component: HomeComponent },
 ];

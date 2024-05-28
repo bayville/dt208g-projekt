@@ -27,6 +27,15 @@
                 background: darken(a.$primary-yellow, 15%);
             }
         }
+        &--light-blue{
+            @extend .btn;
+            background: a.$primary-light-blue;
+            color: a.$primary-blue;
+            &:hover{
+                color: a.$primary-blue;
+                background: lighten(a.$primary-light-blue, 10%);
+            }
+        }
         &--dark{
             @extend .btn;
             background: a.$primary-dark;
@@ -38,28 +47,6 @@
         }
     }
 
-    &__outline{
-        &--yellow{
-            @extend .btn;
-            background-color: transparent;
-            color: a.$primary-yellow;
-            border: 2px solid a.$primary-yellow;
-            &:hover{
-                color: darken(a.$primary-yellow, 10%);
-            }
-        }
-
-        &--beige{
-            @extend .btn;
-            background-color: transparent;
-            color: a.$primary-beige;
-            border: 2px solid a.$primary-beige;
-            &:hover{
-                color: a.$primary-dark;
-                background-color: a.$primary-beige;
-            }
-        }
-    }
 }
 
 

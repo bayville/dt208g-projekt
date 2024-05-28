@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 
 @Component({
@@ -33,7 +34,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule, 
     MatButtonModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    SpinnerComponent
   ],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.scss'

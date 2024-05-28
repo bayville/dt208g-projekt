@@ -1,17 +1,16 @@
 @use '../../../styles/styles.scss' as styles;
-
-
 .hero {
     background-color: styles.$primary-blue;
     section {
-    
         display: grid;
         grid-template-columns: 1fr 1fr;
-        padding-block: styles.$section-padding;
+        padding-block: calc(styles.$section-padding * 2);
         gap: 2rem;
 
         @include styles.tablet {
             grid-template-columns: 1fr;
+            padding-block: styles.$section-padding;
+
             article {
                 order: 2;
             }

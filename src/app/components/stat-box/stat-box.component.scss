@@ -1,0 +1,40 @@
+@use '../../../styles/styles.scss' as styles;
+
+.stats {
+    text-align: center;
+    background-color: styles.$primary-dark;
+    min-height: 240px;
+    color: styles.$white-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+    padding-block: 2em;
+
+    &__wrapper{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+
+        @include styles.mobile {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        div {
+            border-bottom: 1px solid white;
+            padding: 1em;
+        }
+    }
+
+    h3, h4{
+        color: styles.$primary-yellow;
+    }
+
+    .white{
+        color: #fff;
+    }
+
+
+}

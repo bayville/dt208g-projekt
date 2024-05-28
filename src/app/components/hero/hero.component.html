@@ -4,8 +4,12 @@
             <h1 class="hero__title">Din resa börjar här</h1>
             <h2 class="hero__title--sub"> Utbildning för en hållbar framtid</h2>
             <p>Utforska våra innovativa utbildningar och upplev en akademisk resa som formar din framtid. Bli en del av vårt engagerande och stödjande universitetsgemenskap.</p>
-            <button class="btn__primary--yellow">Våra kurser</button>
+            <button class="btn__primary--yellow" routerLink="/courses">Våra kurser</button>
         </article>
-        <img src="../../../assets/img/hero_image.jpg" alt="Studenter studerar och dricker kaffe.">
+        <picture>
+            <source srcset="../../../assets/img/hero_image.avif" type="image/avif">
+            <img ngSrc="../../../assets/img/hero_image.jpg" alt="Studenter studerar och dricker kaffe." width="552" height="368" priority>
+        </picture>
+          
     </section>
 </div>

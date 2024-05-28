@@ -4,7 +4,6 @@ import { Course } from '../../models/course';
 import { NgFor, NgIf } from '@angular/common';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ScheduleService } from '../../services/schedule.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource, MatTableModule} from '@angular/material/table';
@@ -15,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 
 @Component({
@@ -25,7 +25,6 @@ import { MatSelectModule } from '@angular/material/select';
     MatTabsModule, 
     MatProgressBarModule, 
     NgIf, 
-    MatProgressSpinnerModule, 
     ScheduleListComponent, 
     MatTableModule, 
     MatSortModule, 
@@ -35,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
+    SpinnerComponent
   ],
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.scss'
