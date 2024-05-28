@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './link-box.component.scss'
 })
 export class LinkBoxComponent {
+  //Input to populate content, link and class for linkbox
   @Input() text: string = 'Default Title';
   @Input() linkBoxClass: string = 'linkBox__light-blue';
   @Input() link: string = 'Default Button Text';

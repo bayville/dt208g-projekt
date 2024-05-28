@@ -56,13 +56,14 @@ export class ScheduleListComponent {
  
  }
  
+ //Starts to get the schedule and get the total points from courses saved i schedule service
  ngOnInit() {
   this.scheduleInit();
   const points = this.scheduleService.countPoints();
   console.log(points);
 }
 
-
+//Gets all saved courses
 scheduleInit(): void {
   const savedCourses = this.scheduleService.getCourses();
   if (savedCourses){
@@ -74,78 +75,81 @@ scheduleInit(): void {
   }
 }
 
+//Initates the paginator and sort module
 ngAfterViewInit() {
   this.dataSource.paginator = this.paginator;
   this.dataSource.sort = this.sort;
 }
 
+//Get the subjects from saved courses
+getSubjects(): void {
+  const subjectsSet = new Set<string>(); //Using set to guarantee no duplicates are added
+  this.courses.forEach(course => {
+    subjectsSet.add(course.subject);
+  });
+  // Convert Set back to an array
+  this.subjects = Array.from(subjectsSet);
+}
 
- getSubjects(): void {
-   const subjectsSet = new Set<string>(); //Using set to guarantee no duplicates are added
-   this.courses.forEach(course => {
-     subjectsSet.add(course.subject);
-   });
-   // Convert Set back to an array
-   this.subjects = Array.from(subjectsSet);
- }
+//Applies filter from search
+applyFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filterValue.trim().toLowerCase();
 
- applyFilter(event: Event) {
-   const filterValue = (event.target as HTMLInputElement).value;
-   this.dataSource.filter = filterValue.trim().toLowerCase();
+  if (this.dataSource.paginator) {
+    this.dataSource.paginator.firstPage();
+  }
 
-   if (this.dataSource.paginator) {
-     this.dataSource.paginator.firstPage();
-   }
+}
 
- }
+//Sets the datasource
+setDatasource(dataSource: Course[]) : void{
+  this.dataSource.data = dataSource;
+  if (this.dataSource.paginator) {
+    this.dataSource.paginator.firstPage();
+  }
+}
 
- setDatasource(dataSource: Course[]) : void{
-   this.dataSource.data = dataSource;
-   if (this.dataSource.paginator) {
-     this.dataSource.paginator.firstPage();
-   }
- }
+//Applies the select dropdown filter
+applySelectFilter(event: any) {
+  if (event.value === 'Alla'){
+    this.setDatasource(this.courses);
+  } else {
+      let filteredData: Course[] = this.courses.filter((course) => course.subject === event.value);
+      this.setDatasource(filteredData);
+  }
+}
 
- applySelectFilter(event: any) {
-   if (event.value === 'Alla'){
-     this.setDatasource(this.courses);
-   } else {
-       let filteredData: Course[] = this.courses.filter((course) => course.subject === event.value);
-       this.setDatasource(filteredData);
-   }
- }
+//Removes course from schedule and displays snackbar based on succes or fail
+removeCourse(course : Course){
+  this.scheduleService.removeCourse(course).subscribe(response => {
+    if (response.status === true) {
+      this.snackBar.open(`Kursen ${course.courseName} borttagen från ramschema.`, 'Stäng', {
+        duration: 3000, // 3 sekunder
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        panelClass: ['success-snackbar']
+      })
+      this.scheduleInit();
+      this.ngAfterViewInit();
+    } else {
+      this.snackBar.open(`${response.error}`, 'Stäng', {
+        duration: 3000, // 3 sekunder
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        panelClass: ['failed-snackbar']
+      });
+    }
+  });
+}
 
- removeCourse(course : Course){
-   this.scheduleService.removeCourse(course).subscribe(response => {
-     if (response.status === true) {
-       this.snackBar.open(`Kursen ${course.courseName} borttagen från ramschema.`, 'Stäng', {
-         duration: 3000, // 3 sekunder
-         horizontalPosition: 'right',
-         verticalPosition: 'bottom',
-         panelClass: ['success-snackbar']
-       })
-       this.scheduleInit();
-       this.ngAfterViewInit();
-     } else {
-       this.snackBar.open(`${response.error}`, 'Stäng', {
-         duration: 3000, // 3 sekunder
-         horizontalPosition: 'right',
-         verticalPosition: 'bottom',
-         panelClass: ['failed-snackbar']
-       });
-     }
-   });
- }
-
- //Clears the schedule and reloads schedule
+//Clears the schedule and reloads schedule
 clearSchedule(){
   const confirm = window.confirm('Är du säker på att du vill rensa ramschemat?');
-
   if (confirm){
     this.scheduleService.removeAllCourses();
     this.scheduleInit();
   }
-
  }
  
  }

@@ -12,11 +12,12 @@ import { CourseService } from '../../services/course.service';
 export class StatBoxComponent {
   courses : Course[] = [];
   subjects : string[] = [];
-  totalCourses : number = 0;
-  totalSubjects : number = 0;
+  totalCourses : number = 0; //Displayed as number on page
+  totalSubjects : number = 0; //Display as a number on page
 
   constructor(private courseService : CourseService) {}
   
+  //Loads the courses and gets the subject, sets the total courses and subjects to array length.
   ngOnInit() {
     this.courseService.loadCourses().subscribe((courses => {
       this.courses = courses;
@@ -24,10 +25,10 @@ export class StatBoxComponent {
       this.getSubjects();
       this.totalCourses = this.courses.length;
       this.totalSubjects = this.subjects.length;
-      console.log(this.subjects);
     }));
   }
   
+  //Get subjects from courses
   getSubjects(): void {
     const subjectsSet = new Set<string>(); //Using set to guarantee no duplicates are added
     this.courses.forEach(course => {

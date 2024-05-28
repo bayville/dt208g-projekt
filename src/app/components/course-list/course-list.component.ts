@@ -58,6 +58,7 @@ export class CourseListComponent{
   }
   
   ngOnInit() {
+    //Gets all the courses
     this.courseService.loadCourses().subscribe((courses => {
       this.loaded = true;
       this.courses = courses;
@@ -69,6 +70,7 @@ export class CourseListComponent{
     }));
   }
   
+  //Extracts all the subjects from courses
   getSubjects(): void {
     const subjectsSet = new Set<string>(); //Using set to guarantee no duplicates are added
     this.courses.forEach(course => {
@@ -78,7 +80,8 @@ export class CourseListComponent{
     this.subjects = Array.from(subjectsSet);
   }
 
-  applyFilter(event: Event) {
+  //Applies filter based on search
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -88,6 +91,7 @@ export class CourseListComponent{
 
   }
 
+  //Set the datasource and paginator to first page
   setDatasource(dataSource: Course[]) : void{
     this.dataSource.data = dataSource;
     if (this.dataSource.paginator) {
@@ -95,6 +99,7 @@ export class CourseListComponent{
     }
   }
 
+  //Apply filter for select dropdown
   applySelectFilter(event: any) {
     if (event.value === 'Alla'){
       this.setDatasource(this.courses);
@@ -104,6 +109,7 @@ export class CourseListComponent{
     }
   }
 
+  //Adds a new course to the schedule
   addCourse(course : Course){
     this.scheduleService.addCourse(course).subscribe(respone => {
       if (respone.status === true) {

@@ -1,6 +1,7 @@
 <app-header></app-header>
 <router-outlet />
 
+<!-- Defers the loading of the footer until displayed in viewport -->
 @defer (on viewport) {
     <app-footer></app-footer>
     }@placeholder {

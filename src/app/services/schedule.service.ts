@@ -10,14 +10,17 @@ export class ScheduleService {
   //Variable to store courses
   private courses: Course[] = []
 
+//loads courses
 constructor() { 
   this.loadSavedCourses();
 }
 
+//Returns courses-array
 public getCourses(): Course[]{
   return this.courses;
 }
 
+//Adds a course to the schedule
 public addCourse(course: Course): Observable<Response> {
   try {
       const existingCourse = this.courses.find((c) => c.courseCode === course.courseCode);
@@ -34,6 +37,7 @@ public addCourse(course: Course): Observable<Response> {
   }
 }
 
+//Removes course from schedule
 public removeCourse(course: Course): Observable<Response> {
   try {
     const initialLength = this.courses.length;
@@ -52,20 +56,24 @@ public removeCourse(course: Course): Observable<Response> {
   }
 }
 
+//Returns total amount of points from saved courses in scheduele
 public countPoints(): number {
   return this.courses.reduce((total, {points}) => total + (points), 0);
 
 }
 
+//Clears the saved courses array
 public removeAllCourses() {
   this.courses = [];
   this.saveCourses();
 }
   
+//Saves the coursesarray in localstorage
 private saveCourses() : void{
   localStorage.setItem('courseSchedule', JSON.stringify(this.courses));
 }
 
+//Loads the courses from localstorage
 private loadSavedCourses() : void {
   this.courses = [];
   const storedCourses: string | null = localStorage.getItem('courseSchedule');
