@@ -1,4 +1,66 @@
-# Dt208gProjekt
+# DT208g - Projekt
+Det här repot innehåller koden för webbplatsen skapat för projektuppfigten i kursen DT208G - Programmering i TypeScript. Syftet med arbetet har varit att använda sig av programmeringsspråket TypeScript samt frontend ramverket Angular och dess funktioner för att skapa en webbplats som hämtar och läser in data från en extern tjänst.
+
+[Livedemo av webbplatsen](https://rattviksuniv.bayville.se)
+
+## Installation
+
+För att installera och köra projektet lokalt, följ dessa steg:
+
+1. Klona GitHub-repot:
+
+```bash
+git clone https://github.com/bayville/dt208g-projekt.git
+npm install
+ng serve
+```
+2. Konfigurera filen i mappen app/config för att ändra adressen till din webbtjänst: t.ex. 127.0.0.1/api. 
+
+3. Om du startar repot på localhost kan du starta med flaggan --host för att göra den tillgänglig via lan. t.ex: ng serve --host 0.0.0.0 
+
+
+## Kort information om webbplatsen
+
+- Webbplatsen är byggd med 11 komponenter för olika sektioner och ytterligare 4 komponetner för de olika sidorna
+- Den implementerar Angulars inbyggda routing
+- Den använder local storage för att lagra och hämta kurser sparade i ramschemat
+- Den innerhåller startsida, kurssida, ramschema samt en 404-sida.
+- Den använder sig Angular Material / Material UI för att visa data i tabeller och implementera filtrering, paginering och sortering
+
+## Modeller
+### Course
+``` typescript
+export interface Course {
+    courseCode: string,
+    subjectCode: string,
+    level: string,
+    progression: string,
+    courseName: string,
+    points: number,
+    institutionCode: string,
+    subject: string,
+    syllabus: string
+}
+```
+### Response
+``` typescript
+export interface Response {
+    message?: string;
+    status: boolean;
+    error?: Error;
+}
+```
+
+## Services
+
+### Course
+Hämtar data från en extern JSON-fil, och returnerar den som en observable.
+
+
+### Schedule
+Hämtar och skriver sparade kurser till local storage. Innehåller metoder för att lägga till, ta bort och rensa alla  sparade kurser. Innehåller även en metod för att returnerar totalt antal poäng för sparade kurser.
+
+----
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
 
