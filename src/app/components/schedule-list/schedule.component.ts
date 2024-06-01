@@ -59,8 +59,7 @@ export class ScheduleListComponent {
  //Starts to get the schedule and get the total points from courses saved i schedule service
  ngOnInit() {
   this.scheduleInit();
-  const points = this.scheduleService.countPoints();
-  console.log(points);
+  this.points = this.scheduleService.countPoints();
 }
 
 //Gets all saved courses
