@@ -58,7 +58,7 @@
             </table>
         <div class="toolbar">
           <p class="center">Totalt antal poäng i ramschema: {{points}}</p>
-          <button mat-flat-button color="warn" (click)="clearSchedule();"><mat-icon>delete</mat-icon> Rensa ramschema</button>
+          <button mat-flat-button id="clearSchedule" (click)="clearSchedule();"><mat-icon>delete</mat-icon> Rensa ramschema</button>
         </div>
         <mat-paginator [pageSizeOptions]=" [20, 50, 100 ]" aria-label="Select page of users"></mat-paginator>
       </div>

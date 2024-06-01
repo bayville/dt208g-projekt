@@ -53,9 +53,7 @@ export class CourseListComponent{
   @ViewChild(MatSort) sort: MatSort = <MatSort>{};
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{};
 
-  constructor(private courseService : CourseService, private scheduleService: ScheduleService, private snackBar : MatSnackBar) {
-  
-  }
+  constructor(private courseService : CourseService, private scheduleService: ScheduleService, private snackBar : MatSnackBar) {}
   
   ngOnInit() {
     //Gets all the courses
@@ -66,7 +64,6 @@ export class CourseListComponent{
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.getSubjects();
-      console.log(this.subjects);
     }));
   }
   
@@ -88,7 +85,6 @@ export class CourseListComponent{
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-
   }
 
   //Set the datasource and paginator to first page
@@ -128,7 +124,6 @@ export class CourseListComponent{
         });
       }
     });
-
   }
   
   }

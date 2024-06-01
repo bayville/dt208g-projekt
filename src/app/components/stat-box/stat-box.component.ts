@@ -21,7 +21,6 @@ export class StatBoxComponent {
   ngOnInit() {
     this.courseService.loadCourses().subscribe((courses => {
       this.courses = courses;
-      console.log(this.courses);
       this.getSubjects();
       this.totalCourses = this.courses.length;
       this.totalSubjects = this.subjects.length;

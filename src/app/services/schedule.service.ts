@@ -59,7 +59,6 @@ public removeCourse(course: Course): Observable<Response> {
 //Returns total amount of points from saved courses in scheduele
 public countPoints(): number {
   return this.courses.reduce((total, {points}) => total + (points), 0);
-
 }
 
 //Clears the saved courses array

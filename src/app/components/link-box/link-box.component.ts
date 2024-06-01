@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
 })
 export class LinkBoxComponent {
   //Input to populate content, link and class for linkbox
-  @Input() text: string = 'Default Title';
+  @Input() text: string = 'Rättviks Universitet';
   @Input() linkBoxClass: string = 'linkBox__light-blue';
-  @Input() link: string = 'Default Button Text';
+  @Input() link: string = '/courses';
 }
