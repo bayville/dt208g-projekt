@@ -14,13 +14,9 @@ git clone https://github.com/bayville/dt208g-projekt.git
 npm install
 ng serve
 ```
-2. Konfigurera filen i mappen app/config för att ändra adressen till din webbtjänst: t.ex. 127.0.0.1/api. 
-
-3. Om du startar repot på localhost kan du starta med flaggan --host för att göra den tillgänglig via lan. t.ex: ng serve --host 0.0.0.0 
 
 
 ## Kort information om webbplatsen
-
 - Webbplatsen är byggd med 11 komponenter för olika sektioner och ytterligare 4 komponetner för de olika sidorna
 - Den implementerar Angulars inbyggda routing
 - Den använder local storage för att lagra och hämta kurser sparade i ramschemat
